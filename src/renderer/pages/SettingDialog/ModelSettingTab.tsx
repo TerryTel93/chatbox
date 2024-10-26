@@ -5,6 +5,7 @@ import ChatboxAISetting from './ChatboxAISetting'
 import AIProviderSelect from '../../components/AIProviderSelect'
 import { OllamaHostInput, OllamaModelSelect } from './OllamaSetting'
 import SiliconFlowSetting from './SiliconFlowSetting'
+import MyOwnSetting from './myOwnSettings'
 import MaxContextMessageCountSlider from '@/components/MaxContextMessageCountSlider'
 import TemperatureSlider from '@/components/TemperatureSlider'
 
@@ -25,10 +26,13 @@ export default function ModelSettingTab(props: ModelConfigProps) {
             {settingsEdit.aiProvider === ModelProvider.OpenAI && (
                 <OpenAISetting settingsEdit={settingsEdit} setSettingsEdit={setSettingsEdit} />
             )}
-            {settingsEdit.aiProvider === ModelProvider.ChatboxAI && (
+            {/* {settingsEdit.aiProvider === ModelProvider.ChatboxAI && (
                 <ChatboxAISetting settingsEdit={settingsEdit} setSettingsEdit={setSettingsEdit} />
+            )} */}
+            {settingsEdit.aiProvider === ModelProvider.myOwn && (
+                <MyOwnSetting settingsEdit={settingsEdit} setSettingsEdit={setSettingsEdit} />
             )}
-            {settingsEdit.aiProvider === ModelProvider.Ollama && (
+            {/* {settingsEdit.aiProvider === ModelProvider.Ollama && (
                 <>
                     <OllamaHostInput
                         ollamaHost={settingsEdit.ollamaHost}
@@ -48,10 +52,10 @@ export default function ModelSettingTab(props: ModelConfigProps) {
                         onChange={(v) => setSettingsEdit({ ...settingsEdit, temperature: v })}
                     />
                 </>
-            )}
-             {settingsEdit.aiProvider === ModelProvider.SiliconFlow && (
+            )} */}
+             {/* {settingsEdit.aiProvider === ModelProvider.SiliconFlow && (
                 <SiliconFlowSetting settingsEdit={settingsEdit} setSettingsEdit={setSettingsEdit} />
-            )}
+            )} */}
         </Box>
     )
 }

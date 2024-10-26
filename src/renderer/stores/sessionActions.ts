@@ -184,8 +184,8 @@ export async function generate(sessionId: string, targetMsg: Message) {
         ...targetMsg,
         content: placeholder,
         cancel: undefined,
-        aiProvider: settings.aiProvider,
-        model: getModelDisplayName(settings, session.type || 'chat'),
+        aiProvider: session.aiProvider ?? settings.aiProvider,
+        model: getModelDisplayName((session.aiProvider ? { aiProvider: session.aiProvider } : settings), session.type || 'chat'),
         generating: true,
         errorCode: undefined,
         error: undefined,
@@ -197,7 +197,7 @@ export async function generate(sessionId: string, targetMsg: Message) {
     let targetMsgIx = messages.findIndex((m) => m.id === targetMsg.id)
 
     try {
-        const model = getModel(settings, configs)
+        const model = getModel(session.aiProvider ?? settings.aiProvider, settings, configs)
         switch (session.type) {
             case 'chat':
             case undefined:
@@ -254,7 +254,7 @@ async function _generateName(sessionId: string, modifyName: (sessionId: string, 
     }
     const configs = await platform.getConfig()
     try {
-        const model = getModel(settings, configs)
+        const model = getModel(session.aiProvider ?? settings.aiProvider, settings, configs)
         let name = await model.chat(promptFormat.nameConversation(
             session.messages
                 .filter(m => m.role !== 'system')

@@ -48,6 +48,7 @@ export interface Session {
     type?: SessionType
     name: string
     picUrl?: string
+    aiProvider?: ModelProvider
     messages: Message[]
     copilotId?: string
 }
@@ -64,12 +65,17 @@ export function createMessage(role: MessageRole = MessageRoleEnum.User, content:
 export enum ModelProvider {
     ChatboxAI = 'chatbox-ai',
     OpenAI = 'openai',
-    Ollama = 'ollama',
-    SiliconFlow = 'silicon-flow',
+    // Ollama = 'ollama',
+    // SiliconFlow = 'silicon-flow',
+    myOwn = 'my-own',
 }
 
 export interface ModelSettings {
     aiProvider: ModelProvider
+
+    //myOWn
+    myOwnKey: string
+    myOwnApiHost: string
 
     // openai
     openaiKey: string
@@ -164,6 +170,7 @@ export interface CopilotDetail {
     starred?: boolean
     usedCount: number
     shared?: boolean
+    model?: ModelProvider
 }
 
 export interface Toast {

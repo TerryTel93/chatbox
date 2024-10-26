@@ -31,7 +31,7 @@ export default function AIProviderSelect(props: ModelConfigProps) {
     return (
         <>
             <Typography variant='caption' className='opacity-50'>
-                {t('Model Provider')}:
+                {t('Default Model Provider')}:
             </Typography>
             <div className='flex items-end justify-between'>
                 <Button

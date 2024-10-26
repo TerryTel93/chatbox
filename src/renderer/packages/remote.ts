@@ -9,7 +9,7 @@ import {
 } from '../../shared/types'
 import { ofetch } from 'ofetch'
 
-export const API_ORIGIN = 'https://chatboxai.app'
+export const API_ORIGIN = 'https://localhost'
 
 
 export async function checkNeedUpdate(version: string, os: string, config: Config, settings: Settings) {
@@ -29,44 +29,47 @@ export async function checkNeedUpdate(version: string, os: string, config: Confi
 }
 
 export async function getSponsorAd(): Promise<null | SponsorAd> {
-    type Response = {
-        data: null | SponsorAd
-    }
-    const res = await ofetch<Response>(`${API_ORIGIN}/sponsor_ad`, {
-        retry: 3,
-    })
-    return res['data'] || null
+    // type Response = {
+    //     data: null | SponsorAd
+    // }
+    // const res = await ofetch<Response>(`${API_ORIGIN}/sponsor_ad`, {
+    //     retry: 3,
+    // })
+    // return res['data'] || null
+    return null;
 }
 
 export async function listSponsorAboutBanner() {
-    type Response = {
-        data: SponsorAboutBanner[]
-    }
-    const res = await ofetch<Response>(`${API_ORIGIN}/sponsor_ad`, {
-        retry: 3,
-    })
-    return res['data'] || []
+    // type Response = {
+    //     data: SponsorAboutBanner[]
+    // }
+    // const res = await ofetch<Response>(`${API_ORIGIN}/sponsor_ad`, {
+    //     retry: 3,
+    // })
+    // return res['data'] || []
+    return [];
 }
 
 export async function listCopilots(lang: string) {
-    type Response = {
-        data: CopilotDetail[]
-    }
-    const res = await ofetch<Response>(`${API_ORIGIN}/api/copilots/list`, {
-        method: 'POST',
-        retry: 3,
-        body: { lang },
-    })
-    return res['data']
+    // type Response = {
+    //     data: CopilotDetail[]
+    // }
+    // const res = await ofetch<Response>(`${API_ORIGIN}/api/copilots/list`, {
+    //     method: 'POST',
+    //     retry: 3,
+    //     body: { lang },
+    // })
+    // return res['data']
+    return [];
 }
 
 export async function recordCopilotShare(detail: CopilotDetail) {
-    await ofetch(`${API_ORIGIN}/api/copilots/share-record`, {
-        method: 'POST',
-        body: {
-            detail: detail,
-        },
-    })
+    // await ofetch(`${API_ORIGIN}/api/copilots/share-record`, {
+    //     method: 'POST',
+    //     body: {
+    //         detail: detail,
+    //     },
+    // })
 }
 
 export async function getRemoteConfig(config: keyof RemoteConfig) {

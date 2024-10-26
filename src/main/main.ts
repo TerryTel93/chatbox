@@ -32,21 +32,21 @@ class AppUpdater {
         const locale = new Locale()
 
         autoUpdater.logger = log
-        autoUpdater.setFeedURL('https://chatboxai.app/api/auto_upgrade/open-source')
-        autoUpdater.checkForUpdatesAndNotify()
-        autoUpdater.once('update-downloaded', (event) => {
-            dialog
-                .showMessageBox({
-                    type: 'info',
-                    buttons: [locale.t('Restart'), locale.t('Later')],
-                    title: locale.t('App_Update'),
-                    message: event.releaseName || locale.t('New_Version'),
-                    detail: locale.t('New_Version_Downloaded'),
-                })
-                .then((returnValue) => {
-                    if (returnValue.response === 0) autoUpdater.quitAndInstall()
-                })
-        })
+        // autoUpdater.setFeedURL('https://chatboxai.app/api/auto_upgrade/open-source')
+        // autoUpdater.checkForUpdatesAndNotify()
+        // autoUpdater.once('update-downloaded', (event) => {
+        //     dialog
+        //         .showMessageBox({
+        //             type: 'info',
+        //             buttons: [locale.t('Restart'), locale.t('Later')],
+        //             title: locale.t('App_Update'),
+        //             message: event.releaseName || locale.t('New_Version'),
+        //             detail: locale.t('New_Version_Downloaded'),
+        //         })
+        //         .then((returnValue) => {
+        //             if (returnValue.response === 0) autoUpdater.quitAndInstall()
+        //         })
+        // })
     }
 }
 

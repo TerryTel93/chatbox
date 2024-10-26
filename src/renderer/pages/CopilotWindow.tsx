@@ -34,9 +34,13 @@ import { v4 as uuidv4 } from 'uuid'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import * as atoms from '../stores/atoms'
 import * as sessionActions from '../stores/sessionActions'
-import { useAtomValue } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import platform from '../packages/platform'
 import { trackingEvent } from '@/packages/event'
+import { AIModelProviderMenuOptionList } from '@/packages/models'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { settingsAtom } from '../stores/atoms'
+import SimpleSelect from '@/components/SimpleSelect'
 
 interface Props {
     open: boolean
@@ -75,6 +79,7 @@ export default function CopilotWindow(props: Props) {
             picUrl: copilot.picUrl,
             messages: msgs,
             copilotId: copilot.id,
+            aiProvider: copilot.model,
         })
         trackingEvent('create_copilot_conversation', { event_category: 'user' })
     }
@@ -403,7 +408,9 @@ function CopilotForm(props: CopilotFormProps) {
             setCopilotEdit({ ...copilotEdit, [field]: event.target.value })
         }
     }
+    const [settings, setSettings] = useAtom(settingsAtom);
     const save = () => {
+        
         copilotEdit.name = copilotEdit.name.trim()
         copilotEdit.prompt = copilotEdit.prompt.trim()
         if (copilotEdit.picUrl) {
@@ -466,6 +473,31 @@ function CopilotForm(props: CopilotFormProps) {
                 value={copilotEdit.picUrl}
                 onChange={inputHandler('picUrl')}
             />
+
+            <SimpleSelect
+                label={t('Model Provider')}
+                value={copilotEdit.model as string}
+                // onChange={(fontSize) => setSettingsEdit({ ...settingsEdit, fontSize: fontSize })}
+                options={AIModelProviderMenuOptionList}
+                onChange={
+                    (value) => {
+                        const selected = AIModelProviderMenuOptionList.find((provider) => provider.value === value);
+                        if (selected) {
+                            setCopilotEdit({ ...copilotEdit, ['model']: selected.value })
+                        }
+                    }
+                } 
+            />
+              {/* <Button
+                    variant="contained"
+                    disableElevation
+                    onClick={openMenu}
+                    endIcon={<KeyboardArrowDownIcon />}
+                >
+                    <Typography className='text-left' maxWidth={200} noWrap>
+                        { AIModelProviderMenuOptionList.find((provider) => provider.value === settings.aiProvider)?.label || 'Unknown' }
+                    </Typography>
+                </Button> */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <FormGroup row>
                     <FormControlLabel
@@ -498,5 +530,6 @@ export async function getEmptyCopilot(): Promise<CopilotDetail> {
         starred: false,
         usedCount: 0,
         shared: true,
+        model: undefined,
     }
 }

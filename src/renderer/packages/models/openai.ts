@@ -249,7 +249,7 @@ export const openaiModelConfigs = {
     'gpt-4-32k-0314': {
         maxTokens: 4096,
         maxContextTokens: 32768,
-    },
+    }
 }
 export type Model = keyof typeof openaiModelConfigs
 export const models = Array.from(Object.keys(openaiModelConfigs)).sort() as Model[]

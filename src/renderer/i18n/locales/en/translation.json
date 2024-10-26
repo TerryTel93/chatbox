@@ -242,6 +242,7 @@
     "Instruction (System Prompt)": "Instruction (System Prompt)",
     "Reset to Global Settings": "Reset to Global Settings",
     "Model Provider": "Model Provider",
+    "Default Model Provider": "Default Model Provider",
     "Untitled": "Untitled",
     "Add Custom Provider": "Add Custom Provider",
     "Here you can add and manage various custom model providers. As long as the provider's API is compatible with the selected API mode, you can seamlessly connect and use it within Chatbox.": "Here you can add and manage various custom model providers. As long as the provider's API is compatible with the selected API mode, you can seamlessly connect and use it within Chatbox.",
